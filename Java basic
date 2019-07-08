@@ -1,0 +1,58 @@
+Java basic
+
+
+
+
+===================================================================
+integer to String
+
+best:
+int number = -782;
+String numberAsString = "" + number;
+
+
+1.
+int number = -782;
+String numberAsString = Integer.toString(number);
+
+2.
+int number = -782;
+String numberAsString = String.valueOf(number);
+
+or
+
+String numberAsString = new Integer(-782).toString();
+
+3. DeciamlFormat
+int number = 12345;
+DecimalFormat decimalFormat = new DecimalFormat("#");
+String numberAsString = decimalFormat.format(number);
+System.out.println(numberAsString);
+
+
+
+
+
+
+===================================================================================
+
+Loop
+
+Array list 
+
+for (Integer num : list) {
+  System.out.print(num);
+}
+
+list.size();
+list.add();
+list.get(i);
+
+
+===================================================================================
+String Builder
+
+StringBuilder sb = new StringBuilder(); // StringBuilder sb = new StringBuilder(Str_name);
+
+sb.append(temp);
+Sb.prepend(temp);

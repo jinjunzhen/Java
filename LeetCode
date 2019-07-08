@@ -1,0 +1,164 @@
+7. Reverse Integer
+
+class Solution {
+    public int reverse(int x) {
+        int sign = 1;
+        
+        while (x % 10 == 0 && x!=0) 
+            x = x / 10;
+        
+        int y = 0;
+        String str, strReverse;
+        
+        if ( x > 2147483647 || x < -2147483648 || x == 0)
+            return 0;
+        
+        if ( x<0 ) {
+            y = - x;
+            sign = -1;
+        }
+        else {
+            y = x;
+            sign = 1;
+        }
+        
+        str = Integer.toString(y);  // z contains number string
+        
+        StringBuilder sb = new StringBuilder(str);
+        
+        
+        strReverse = sb.reverse().toString();
+        
+        try{
+            y = Integer.valueOf(strReverse);
+        }catch (NumberFormatException ex) { 
+            // handle your exception
+            return 0;
+        }
+        
+        y = y * sign;
+        
+        return y;
+        
+    }
+}
+
+
+solutioon:
+
+        int rev = 0;
+        while (x != 0) {
+            int pop = x % 10;
+            x /= 10;
+            if (rev > Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) return 0;
+            if (rev < Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) return 0;
+            rev = rev * 10 + pop;
+        }
+        return rev;
+
+
+
+problem 9:
+
+my solution:
+
+class Solution {
+    public boolean isPalindrome(int x) {
+        
+        String str = Integer.toString(x);
+        
+        
+        StringBuilder sb = new StringBuilder(str);
+        String strRev = sb.reverse().toString();
+        
+        if (strRev.equals(str)) 
+            return true;
+        else
+            return false;
+        
+    }
+}
+
+
+
+
+
+sample solution:
+
+    class Solution {
+    public boolean isPalindrome(int x) {
+        
+        if(x<0){
+            return false;
+        }
+        
+        int length = String.valueOf(x).length();
+        int[] digits = new int[length];
+        
+        for(int i = 0; i<length; i++){
+            digits[i] = x % 10;
+            x = x / 10;
+        }
+        
+        for(int j = 0; j < digits.length/2; j++){
+            if(digits[j] != digits[digits.length - 1 - j]){
+                return false;
+            }
+        }
+        
+        return true;
+        
+    }
+}
+
+13. Roman to Integar
+
+class Solution {
+    public int romanToInt(String s) {
+        int sum = 0;
+        char ch;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        
+
+        for (int i = 0; i < s.length(); i++) {
+            ch = s.charAt(i);
+            switch (ch) {
+                case 'I':
+                    list.add(1);
+                    break;
+                case 'V':
+                    list.add(5);
+                    break;
+                case 'X':
+                    list.add(10);
+                    break;
+                case 'L':
+                    list.add(50);
+                    break;
+                case 'C':
+                    list.add(100);
+                    break;
+                case 'D':
+                    list.add(500);
+                    break;
+                case 'M':
+                    list.add(1000);
+                    break;
+                default:
+                    //this is it. 
+            }
+        }
+        // hereby, arraylist has all number filled in.
+        
+        int max = list.size();
+        
+        for (int i =0; i<max-1; i++) {
+            if (list.get(i) < list.get(i+1))
+                sum -= list.get(i);
+            else
+                sum += list.get(i);
+        }
+        sum += list.get(max-1);
+        return sum; 
+    }
+}
