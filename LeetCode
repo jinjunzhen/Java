@@ -1,4 +1,4 @@
-7. Reverse Integer
+<7> Reverse Integer
 
 class Solution {
     public int reverse(int x) {
@@ -57,8 +57,7 @@ solutioon:
         return rev;
 
 
-
-problem 9:
+<9>
 
 my solution:
 
@@ -111,7 +110,7 @@ sample solution:
     }
 }
 
-13. Roman to Integar
+<13> Roman to Integar
 
 class Solution {
     public int romanToInt(String s) {
@@ -162,3 +161,187 @@ class Solution {
         return sum; 
     }
 }
+
+=======================================================
+<38>
+=======================================================
+
+class Solution {
+    public String countAndSay(int n) {
+        String []answer = new String[n+1];
+        int count = 1;
+        
+        answer[0] = null;
+        answer[1] = "1";
+        
+        String result;
+        StringBuilder sb = new StringBuilder();
+        
+        
+        
+        for (int i = 2; i <= n ; i++ ){
+            sb.setLength(0);  // empty stringBuilder
+            
+            for (int j =0; j< answer[i-1].length() -1 ; j++) {
+                count = 1;
+                while(answer[i-1].charAt(j) == answer[i-1].charAt(j+1)) { 
+                    count ++;
+                }
+                sb.append(count);
+                sb.append(answer[i-1].charAt(j));
+                count = 1;
+            }
+            sb.append("" + count);
+            sb.append(answer[i-1].charAt(answer[i-1].length() -1));
+            
+            answer[i] = sb.toString();
+        }   
+        result =   answer[n]; 
+        return result;
+    }
+}
+
+<38>
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int overAllMax = 0;
+        int currentMax = 0;
+        int currentSum = 0;
+        int max = nums[0];
+        
+        
+        for ( int i = 0; i < nums.length ; i ++ ) {
+            currentSum = currentSum + nums[i];
+            
+            if ( currentSum < 0) { 
+                currentSum = 0;  
+            }
+            
+            if ( max < nums[i]) {
+                max = nums[i];
+            }
+            
+            
+            if (currentSum > currentMax) {
+                currentMax = currentSum;
+            }
+            
+            if (currentMax > overAllMax ) {
+                overAllMax = currentMax;
+            }
+            
+        }
+        
+        if (max < 0)
+            return max;
+        else
+            return overAllMax;
+    }
+}
+
+
+<58>
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+        
+        if (s.length() == 0) {
+            return 0;
+        }
+        
+        int count = 0;
+        int i = s.length() -1;
+        
+        
+        while(i >= 0 && s.charAt(i) == ' ') {
+            i --;
+        }
+        
+        while (i >= 0 && s.charAt(i) != ' ') {
+            i --;
+            count ++;
+        }
+        return count;
+    }
+}
+
+
+<66>
+class Solution {
+    public int[] plusOne(int[] digits) {
+        
+        LinkedList<Integer> linkedlist = new LinkedList<> ();
+
+        int i = digits.length -1 ;
+        boolean adding = true;
+        while (i >= 0) {
+            if (adding && digits[i] == 9) {
+                digits[i] = 0;
+            } else if ( adding && digits[i]!= 9) {
+                digits[i] = digits[i] + 1;
+                adding = false;
+            }
+            
+            
+            linkedlist.addFirst(digits[i]);
+            i -= 1;
+        }
+        if (adding) {
+            linkedlist.addFirst(1);
+        }
+
+        int []answer = new int[linkedlist.size()];
+        int j = 0;
+        for (Integer num : linkedlist ) {
+            answer[j] = num;
+            System.out.println(num);
+            j++;
+        }
+        
+        return answer;
+    }
+}
+<414>
+
+class Solution {
+    public int thirdMax(int[] nums) {
+         
+//         if (nums.length == 1) return nums[0]; 
+        
+//         if (nums.length == 2) return nums[0]>=nums[0] ? nums[0] : nums[1];
+
+        PriorityQueue<Integer> pq = new PriorityQueue();
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            if ( set.add(num) ) {
+                pq.add(num);
+                if (pq.size()> 3) {
+                    pq.poll();
+                }
+            }
+        }
+        if (pq.size() < 3) {
+            while (pq.size() > 1) {
+                pq.poll();
+            }
+        }
+        return pq.peek();
+
+    }
+}
+<415>
+
+        int i = num1.length() -1 ;
+        int j = num2.length() -1 ;
+        int carry = 0;
+
+        while (i >=0 || j >=0 || carry > 0) {
+            int x =   i >= 0 ? num1.charAt(i) - '0' : 0 ;
+            int y =   j >= 0 ? num2.charAt(j) - '0' : 0 ;
+
+            sb.append  ((x + y + carry)%10);
+            carry =(x + y + carry)/10;
+            i --;
+            j --;
+        }
